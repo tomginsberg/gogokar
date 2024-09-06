@@ -1,10 +1,8 @@
 "use client";
 
-import React from "react";
-import {Label, Select, TextInput, Button, Textarea, Datepicker} from "flowbite-react";
+import {Label, Select, TextInput, Button, Textarea} from "flowbite-react";
 import {HiOutlineSwitchHorizontal, HiShoppingCart} from "react-icons/hi";
 import {useLocation} from "react-router-dom";
-import {FaArrowRightLong} from "react-icons/fa6";
 import Navbar from "../components/Navbar";
 
 

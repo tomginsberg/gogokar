@@ -1,8 +1,6 @@
 import MyNavbar from '../components/Navbar';
 import ReviewCarousel from "../components/ReviewCarousel"; // Import your reviews JSON data
-import {DarkThemeToggle} from "flowbite-react";
 import BookingComponent from "../components/Booking";
-import {IoShieldCheckmark} from "react-icons/io5";
 
 function Home() {
 
