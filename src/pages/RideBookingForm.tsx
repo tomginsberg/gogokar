@@ -7,7 +7,7 @@ import {useLocation} from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import {loadStripe} from "@stripe/stripe-js";
-import {Elements, CardElement, useStripe, useElements} from "@stripe/react-stripe-js";
+import {Elements, CardElement} from "@stripe/react-stripe-js";
 
 // Initialize Stripe with your public key
 const stripePromise = loadStripe("your-publishable-key-here"); // Replace with your actual publishable key
