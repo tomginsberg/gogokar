@@ -1,6 +1,6 @@
 "use client";
 
-import React, {useState} from "react";
+import {useState} from "react";
 import {Label, Select, TextInput, Button, Textarea} from "flowbite-react";
 import {HiOutlineSwitchHorizontal, HiMail, HiPhone} from "react-icons/hi";
 import {useLocation} from "react-router-dom";
