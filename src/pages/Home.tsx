@@ -33,7 +33,7 @@ function Home() {
                     <figure>
                 <img className="mx-auto h-auto max-w-full rounded-3xl m-4" src="/fleet.jpeg"
                      alt="image description"/>
-                        <figcaption className="text-center text-gray-400">Our Fleet</figcaption>
+                        <figcaption className="text-center text-gray-400">Meet Our Fleet! Our vehicles are regularly maintained. We maintain ample ventilation and encourage social distancing wherever possible. Rest assured, your health and safety are our top priorities as we strive to provide you with a reliable and enjoyable travel experience.</figcaption>
                     </figure>
                 </div>
 
