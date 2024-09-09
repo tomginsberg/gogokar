@@ -21,7 +21,7 @@ const ReviewCarousel: React.FC = () => {
     const reviews = useMemo(() => getRandomReviews(reviewsData, 20), [reviewsData]);
 
     return (
-        <div className="mt-8 w-full sm:h-80">
+        <div className="mt-8 w-full sm:h-60">
             <Carousel slideInterval={2000} indicators={false} className="h-full">
                 {reviews.map((review, index) => (
                     <Review key={index} review={review} />

@@ -3,7 +3,7 @@
 import React, {useState} from "react";
 import {Datepicker, TextInput, Button} from "flowbite-react";
 import {HiOutlineSwitchHorizontal} from "react-icons/hi";
-import { useNavigate } from "react-router-dom"; // Assuming you're using React Router
+import {useNavigate} from "react-router-dom"; // Assuming you're using React Router
 
 
 const BookingComponent: React.FC = () => {
@@ -29,7 +29,7 @@ const BookingComponent: React.FC = () => {
             `Booking a ride from ${locations.fromCity} to ${locations.toCity} on ${selectedDate}`
         )
         if (selectedDate) {
-            navigate("/ride-booking", {
+            navigate("/book", {
                 state: {
                     date: selectedDate,
                     fromCity: locations.fromCity,
@@ -43,7 +43,7 @@ const BookingComponent: React.FC = () => {
 
 
     return (
-        <div className="mx-auto max-w-screen-xl px-4 py-2 text-center lg:px-12 lg:py-16">
+        <div className="mx-auto max-w-screen-xl px-4 text-center lg:px-12 lg:py-8">
             <div className="mx-auto max-w-md rounded-lg bg-white p-6 px-4 dark:bg-gray-800">
                 <div className="mb-4 flex items-center justify-between">
                     <div className="w-20 shrink-0 text-center"> {/* Fixed width for consistency */}
@@ -63,12 +63,9 @@ const BookingComponent: React.FC = () => {
 
                 <div className="mb-4">
                     <Datepicker
-                        className="w-full"
-                        placeholder="Departure date"
-                        aria-label="Select departure date"
+                        className="w-full text-left"
+                        aria-label="Select Travel Date"
                         id="departure-date"
-                        // value={selectedDate} // Bind state to the value prop
-                        // onChange={(date) => setSelectedDate(date)} // Update state on date change
                     />
                 </div>
 
