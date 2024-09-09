@@ -3,6 +3,7 @@ import ReviewCarousel from "../components/ReviewCarousel"; // Import your review
 import BookingComponent from "../components/Booking";
 import Accordion from "../components/Accordion";
 import Footer from "../components/Footer"
+import { IoShieldCheckmark } from "react-icons/io5";
 
 function Home() {
 
@@ -29,11 +30,11 @@ function Home() {
             </div>
             <Accordion/>
 
-                <div className="px-8 py-8">
+                <div className="p-8">
                     <figure>
-                <img className="mx-auto h-auto max-w-full rounded-3xl m-4" src="/fleet.jpeg"
+                <img className="m-4 mx-auto h-auto max-w-full rounded-3xl" src="/fleet.jpeg"
                      alt="image description"/>
-                        <figcaption className="text-center text-gray-400">Meet Our Fleet! Our vehicles are regularly maintained. We maintain ample ventilation and encourage social distancing wherever possible. Rest assured, your health and safety are our top priorities as we strive to provide you with a reliable and enjoyable travel experience.</figcaption>
+                        <figcaption className="text-center text-gray-400 lg:mx-80">Meet Our Fleet! Our vehicles are regularly maintained. We maintain ample ventilation and encourage social distancing wherever possible. Rest assured, your health and safety are our top priorities as we strive to provide you with a reliable and enjoyable travel experience.</figcaption>
                     </figure>
                 </div>
 
@@ -42,7 +43,7 @@ function Home() {
             <Footer/>
 
             {/*<DarkThemeToggle className="fixed bottom-4 left-4 bg-white rounded-lg p-4"/>*/}
-            {/*<IoShieldCheckmark className="fixed bottom-4 right-4 text-3xl text-green-500"/>*/}
+            <IoShieldCheckmark className="fixed bottom-4 right-4 text-3xl text-green-500"/>
 
         </>
 

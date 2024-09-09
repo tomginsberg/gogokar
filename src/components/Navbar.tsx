@@ -8,7 +8,7 @@ export function MyNavbar() {
 
                 <Navbar.Brand href="/">
                     <img
-                        src="/GO-GO-LOGO-TRANSPARENT.png"  // Update this to your actual logo path
+                        src="/GO-GO-LOGO-TRANSPARENT.png"
                         className="mr-3 h-16 sm:h-9"
                         alt="Logo"
                     />

@@ -2,12 +2,21 @@
 
 import {useState} from "react";
 import {Label, Select, TextInput, Button, Textarea} from "flowbite-react";
-import {HiOutlineSwitchHorizontal, HiMail, HiPhone} from "react-icons/hi";
+import {
+    HiOutlineSwitchHorizontal,
+    HiMail,
+    HiPhone,
+    HiChevronDoubleLeft,
+    HiChevronDoubleRight,
+    HiShoppingCart,
+} from "react-icons/hi";
 import {useLocation} from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import {loadStripe} from "@stripe/stripe-js";
 import {Elements, CardElement} from "@stripe/react-stripe-js";
+import {IoPersonCircleSharp, IoCar, IoCard} from "react-icons/io5";
+import { IoShieldCheckmark } from "react-icons/io5";
 
 const stripePromise = loadStripe("your-publishable-key-here"); // Replace with your actual publishable key
 
@@ -77,6 +86,9 @@ function RideBookingForm() {
     // Handle Previous Step
     const prevStep = () => setCurrentStep((prev) => prev - 1);
 
+    const stepTrip = () => setCurrentStep(1)
+    const stepPassenger = () => setCurrentStep(2)
+
     // Handle form submission for Review & Pay
     const handlePayment = () => {
         alert("Payment completed! Booking confirmed.");
@@ -88,10 +100,12 @@ function RideBookingForm() {
             <Navbar/>
             <div className="mx-auto max-w-4xl rounded-lg bg-white px-6 pb-16 dark:bg-gray-800">
                 <ol className="mb-8 flex w-full items-center justify-center space-x-2 rounded-lg border border-gray-200 bg-white p-3 text-center text-sm font-medium text-gray-500 shadow-sm dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 sm:space-x-4 sm:p-4 sm:text-base rtl:space-x-reverse">
-                    <li className={`flex items-center ${currentStep === 1 ? "text-blue-600" : ""}`}>
+                    <li className={`flex items-center ${currentStep === 1 ? "text-blue-600" : ""}`}
+                        onClick={stepTrip}
+                    >
             <span
-                className={`me-2 flex size-5 shrink-0 items-center justify-center rounded-full border ${currentStep >= 1 ? "border-blue-600" : "border-gray-500"} text-xs dark:border-gray-400`}>
-              1
+                className={`me-2 flex size-5 shrink-0 items-center justify-center rounded-full border ${currentStep === 1 ? "border-blue-600" : "border-gray-500"} text-xs dark:border-gray-400`}>
+              <IoCar/>
             </span>
                         Trip <span className="hidden sm:ms-2 sm:inline-flex">Info</span>
                         <svg className="ms-2 size-3 sm:ms-4 rtl:rotate-180" aria-hidden="true"
@@ -100,10 +114,12 @@ function RideBookingForm() {
                                   d="m7 9 4-4-4-4M1 9l4-4-4-4"/>
                         </svg>
                     </li>
-                    <li className={`flex items-center ${currentStep === 2 ? "text-blue-600" : ""}`}>
+                    <li
+                        onClick={stepPassenger}
+                        className={`flex items-center ${currentStep === 2 ? "text-blue-600" : ""}`}>
             <span
-                className={`me-2 flex size-5 shrink-0 items-center justify-center rounded-full border ${currentStep >= 2 ? "border-blue-600" : "border-gray-500"} text-xs dark:border-gray-400`}>
-              2
+                className={`me-2 flex size-5 shrink-0 items-center justify-center rounded-full border ${currentStep === 2 ? "border-blue-600" : "border-gray-500"} text-xs dark:border-gray-400`}>
+              <IoPersonCircleSharp/>
             </span>
                         Personal <span className="hidden sm:ms-2 sm:inline-flex">Info</span>
                         <svg className="ms-2 size-3 sm:ms-4 rtl:rotate-180" aria-hidden="true"
@@ -112,10 +128,11 @@ function RideBookingForm() {
                                   d="m7 9 4-4-4-4M1 9l4-4-4-4"/>
                         </svg>
                     </li>
-                    <li className={`flex items-center ${currentStep === 3 ? "text-blue-600" : ""}`}>
+                    <li
+                        className={`flex items-center ${currentStep === 3 ? "text-blue-600" : ""}`}>
             <span
-                className={`me-2 flex size-5 shrink-0 items-center justify-center rounded-full border ${currentStep >= 3 ? "border-blue-600" : "border-gray-500"} text-xs dark:border-gray-400`}>
-              3
+                className={`me-2 flex size-5 shrink-0 items-center justify-center rounded-full border ${currentStep === 3 ? "border-blue-600" : "border-gray-500"} text-xs dark:border-gray-400`}>
+              <HiShoppingCart/>
             </span>
                         Review & Pay
                     </li>
@@ -124,7 +141,8 @@ function RideBookingForm() {
                 {/* Step 1: Trip Info */}
                 {currentStep === 1 && (
                     <form className="space-y-4" onSubmit={nextStep}>
-                        <h2 className="mb-4 text-lg font-semibold text-gray-900 dark:text-white">Trip Details for {date}</h2>
+                        <h2 className="mb-4 text-lg font-semibold text-gray-900 dark:text-white">Trip Details
+                            for {date}</h2>
                         <div className="mb-4 flex items-center justify-between">
                             <div className="w-20 shrink-0 text-center">
                                 <p className="text-xs text-gray-600">from</p>
@@ -141,11 +159,11 @@ function RideBookingForm() {
                         </div>
                         {/* Pickup Location */}
                         <div>
-                            <Label htmlFor="pickup">Pick-Up Location</Label>
+                            <Label htmlFor="pickup">Pick Up Location</Label>
                             <Select
                                 value={tripDetails.pickup}
                                 onChange={(e) => handleTripDetailsChange('pickup', e.target.value)}
-                                id="pickup" className="w-full" aria-label="Select pick-up location">
+                                id="pickup" className="w-full" aria-label="Select pick up location">
                                 {locations.fromCity === "Toronto"
                                     ? torontoLocations.map((location) => (
                                         <option key={location} value={location}>
@@ -162,11 +180,11 @@ function RideBookingForm() {
 
                         {/* Drop-Off Location */}
                         <div>
-                            <Label htmlFor="dropoff">Drop-Off Location</Label>
+                            <Label htmlFor="dropoff">Drop Off Location</Label>
                             <Select
                                 value={tripDetails.dropoff}
                                 onChange={(e) => handleTripDetailsChange('dropoff', e.target.value)}
-                                id="dropoff" className="w-full" aria-label="Select drop-off location">
+                                id="dropoff" className="w-full" aria-label="Select drop off location">
                                 {locations.toCity === "Toronto"
                                     ? torontoLocations.map((location) => (
                                         <option key={location} value={location}>
@@ -182,7 +200,8 @@ function RideBookingForm() {
                         </div>
 
                         <Button type="submit" className="w-full bg-blue-700 hover:bg-blue-800">
-                            Next: Personal Info
+                            <IoPersonCircleSharp className="mr-2 size-5"/> Personal Info <HiChevronDoubleRight
+                            className="ml-2 size-5"/>
                         </Button>
                     </form>
                 )}
@@ -262,10 +281,12 @@ function RideBookingForm() {
 
                         <div className="flex justify-between">
                             <Button type="button" onClick={prevStep} className="bg-gray-500 hover:bg-gray-600">
-                                Previous: Trip Info
+                                <HiChevronDoubleLeft className="mr-2 size-5"/> Trip Info <IoCar
+                                className="ml-2 size-5"/>
                             </Button>
                             <Button type="submit" className="bg-blue-700 hover:bg-blue-800">
-                                Next: Review & Pay
+                                <HiShoppingCart className="mr-2 size-5"/> Review & Pay <HiChevronDoubleRight
+                                className="ml-2 size-5"/>
                             </Button>
                         </div>
                     </form>
@@ -275,40 +296,78 @@ function RideBookingForm() {
                 {currentStep === 3 && (
                     <div className="space-y-4">
                         <h2 className="mb-4 text-lg font-semibold text-gray-900 dark:text-white">Review & Pay</h2>
-                        <p className="text-gray-700 dark:text-gray-300">
-                            <strong>Trip Summary:</strong>
-                        </p>
-                        <ul className="list-inside list-disc text-gray-600 dark:text-gray-400">
-                            <li>
-                                <span className="font-semibold">From:</span> {locations.fromCity}
-                            </li>
-                            <li>
-                                <span className="font-semibold">To:</span> {locations.toCity}
-                            </li>
-                            <li>
-                                <span className="font-semibold">Pick-Up:</span> {tripDetails.pickup}
-                            </li>
-                            <li>
-                                <span className="font-semibold">Drop-Off:</span> {tripDetails.dropoff}
-                            </li>
-                            <li>
-                                <span className="font-semibold">Date:</span> {date}
-                            </li>
-                            <li>
-                                <span className="font-semibold">Passenger:</span> {personalInfo.firstName}{" "}
-                                {personalInfo.lastName}
-                            </li>
-                            <li>
-                                <span className="font-semibold">Phone:</span> {personalInfo.phone}
-                            </li>
-                            <li>
-                                <span className="font-semibold">Email:</span> {personalInfo.email}
-                            </li>
-                        </ul>
 
-                        <div className="mt-6">
+                        <div className="flex flex-wrap justify-center gap-4">
+                            <div className="max-w-full grow space-y-2">
+                                <div className="flex max-w-full flex-row text-gray-700 dark:text-gray-300">
+                                    <IoCar className="mr-2 mt-0.5 size-5"/> <strong>Trip Summary</strong>
+                                </div>
+                                <dl className="max-w-md divide-y divide-gray-200 rounded-2xl border border-gray-200 p-4 text-gray-900 shadow-sm dark:divide-gray-700 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400">
+                                    <div className="flex flex-col pb-3">
+                                        <dt className="mb-1 text-gray-500 dark:text-gray-400 md:text-lg">Pick Up</dt>
+                                        <dd className="text-lg font-semibold">{tripDetails.pickup}</dd>
+                                    </div>
+                                    <div className="flex flex-col py-3">
+                                        <dt className="mb-1 text-gray-500 dark:text-gray-400 md:text-lg">Drop Off</dt>
+                                        <dd className="text-lg font-semibold">{tripDetails.dropoff}
+                                        </dd>
+                                    </div>
+                                    <div className="flex flex-col pt-3">
+                                        <dt className="mb-1 text-gray-500 dark:text-gray-400 md:text-lg">Date</dt>
+                                        <dd className="text-lg font-semibold">{date}</dd>
+                                    </div>
+                                </dl>
+                            </div>
+
+                            <div className="max-w-full grow space-y-2">
+
+                                <div className="flex max-w-full flex-row text-gray-700 dark:text-gray-300">
+                                    <IoPersonCircleSharp className="mr-2 mt-0.5 size-5"/> <strong>Passenger
+                                    Details</strong>
+                                </div>
+                                <dl className="max-w-md divide-y divide-gray-200 rounded-2xl border border-gray-200 p-4 text-gray-900 shadow-sm dark:divide-gray-700 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400">
+                                    <div className="flex flex-col pb-3">
+                                        <dt className="mb-1 text-gray-500 dark:text-gray-400 md:text-lg">Name</dt>
+                                        <dd className="text-lg font-semibold">{personalInfo.firstName} {personalInfo.lastName}</dd>
+                                    </div>
+                                    <div className="flex flex-col py-3">
+                                        <dt className="mb-1 text-gray-500 dark:text-gray-400 md:text-lg">Phone Number
+                                        </dt>
+                                        <dd className="text-lg font-semibold">{personalInfo.phone}
+                                        </dd>
+                                    </div>
+                                    <div className="flex flex-col pt-3">
+                                        <dt className="mb-1 text-gray-500 dark:text-gray-400 md:text-lg">Email</dt>
+                                        <dd className="text-lg font-semibold">{personalInfo.email}</dd>
+                                    </div>
+                                </dl>
+                            </div>
+                        </div>
+
+                        <hr className="border-gray-200 dark:border-gray-700"/>
+                        <div className="flex max-w-full flex-row text-gray-700 dark:text-gray-300">
+                            <IoCard className="mr-2 mt-0.5 size-5"/> <strong>Payment</strong>
+                        </div>
+                        <div
+                            className="mt-6 rounded-2xl border border-gray-200 p-4 shadow-sm dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400">
+                            <div className="flex flex-row pt-3 space-x-6 mb-2">
+                                <div>
+                                    <dt className="mb-1 text-gray-500 dark:text-gray-400 md:text-lg">Fare</dt>
+                                    <dd className="text-lg font-semibold">$39.00</dd>
+                                </div>
+                                <div>
+                                    <dt className="mb-1 text-gray-500 dark:text-gray-400 md:text-lg">HST</dt>
+                                    <dd className="text-lg font-semibold">$5.07</dd>
+                                </div>
+                                <div>
+                                    <dt className="mb-1 text-gray-500 dark:text-gray-400 md:text-lg">Total</dt>
+                                    <dd className="text-lg font-semibold">$44.07</dd>
+                                </div>
+                            </div>
+
                             <Label htmlFor="card-element">Enter your payment details:</Label>
                             <Elements stripe={stripePromise}>
+                                {/*<CheckoutForm />*/}
                                 <CardElement
                                     id="card-element"
                                     className="mt-2 rounded-md border border-gray-300 p-2"
@@ -331,22 +390,25 @@ function RideBookingForm() {
                             </Elements>
                         </div>
 
+
                         <div className="mt-6 flex justify-between">
                             <Button type="button" onClick={prevStep} className="bg-gray-500 hover:bg-gray-600">
-                                Previous: Personal Info
+                                <HiChevronDoubleLeft className="mr-2 size-5"/> Personal Info
                             </Button>
                             <Button
                                 type="button"
                                 onClick={handlePayment}
                                 className="bg-green-600 hover:bg-green-700"
                             >
-                                Complete Booking
+                                <HiShoppingCart className="mr-2 size-5"/> Complete Booking
                             </Button>
                         </div>
                     </div>
                 )}
             </div>
             <Footer/>
+            <IoShieldCheckmark className="fixed bottom-4 right-4 text-3xl text-green-500"/>
+
         </>
     );
 }

@@ -1,13 +1,16 @@
 import Navbar from "../components/Navbar";
 import {Accordion} from "flowbite-react";
 import Footer from "../components/Footer";
-
+import { IoShieldCheckmark } from "react-icons/io5";
 // policies page
 
 function Policies() {
     return (
         <>
             <Navbar/>
+            <h2 className="mx-8 text-center text-2xl font-semibold text-gray-900 dark:text-white">
+                Read about our Policies
+            </h2>
             <Accordion className="mx-8 my-4 md:mx-64">
                 <Accordion.Panel>
                     <Accordion.Title>Pickup Policies</Accordion.Title>
@@ -66,7 +69,8 @@ function Policies() {
                     </Accordion.Content>
                 </Accordion.Panel>
             </Accordion>
-        <Footer/>
+            <Footer/>
+            <IoShieldCheckmark className="fixed bottom-4 right-4 text-3xl text-green-500"/>
         </>
     );
 }
